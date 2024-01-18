@@ -1,0 +1,37 @@
+# PostgreSQL Properties
+server:
+  port: 8082
+spring:
+  name: scheduling
+  datasource:
+    url: jdbc:postgresql://localhost:5433/customer
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+    # Hibernate Properties
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+    # HikariCP Properties (opcional, mas uma boa escolha para pool de conexões)
+    datasource:
+      hikari:
+        connection-timeout: 20000
+        maximum-pool-size: 5
+
+# Lombok
+lombok:
+  addLombokGeneratedAnnotation: true
+
+# Nominatim Search
+api:
+  openstreetmap-search:
+    url: https://nominatim.openstreetmap.org/search.php?addressdetails=1&street={street}&city={city}&state={state}&country={country}&postalcode={postalcode}&format=jsonv2
+
+# JWT_SECRET
+jwt:
+  secret: 8c428294fbf58a34df7fb328e0ad438c428294fbf58a34df7fb328e0ad43
+  expiration: 86400000

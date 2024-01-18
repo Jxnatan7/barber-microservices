@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  company-service:
+    image: postgres:latest
+    container_name: company-service
+    environment:
+      POSTGRES_DB: company
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    networks:
+      - barber-network
+
+  customer-service:
+    image: postgres:latest
+    container_name: customer-service
+    environment:
+      POSTGRES_DB: customer
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5433:5432"
+    networks:
+      - barber-network
+
+  mongo-haircut:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    container_name: haircut-service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - barber-network
+
+  mongo-scheduling:
+    image: mongo
+    restart: always
+    ports:
+      - "27020:27017"
+    container_name: scheduling-service
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - barber-network
+
+networks:
+  barber-network:
+    driver: bridge
